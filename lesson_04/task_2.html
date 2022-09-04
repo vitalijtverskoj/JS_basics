@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
 </head>
+
 <body>
-<!--
+  <!--
 Обязательное задание.
 
 Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
@@ -47,10 +49,93 @@
 что-нибудь пропустить.
 4. Если непонятно условие - задайте вопрос.
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
+    function PostES5(authorName, text) {
+      this.authorName = authorName;
+      this.text = text;
+      this.date = new Date();
+    }
+
+    PostES5.prototype.edit = function (newText) {
+      this.text = newText;
+      this.date = new Date();
+    }
+
+    function AttachedPostES5(authorName, text) {
+      PostES5.call(this, authorName, text);
+      this.highlighted = false;
+    }
+
+    AttachedPostES5.prototype = Object.create(PostES5.prototype);
+    AttachedPostES5.prototype.constructor = AttachedPostES5;
+
+    AttachedPostES5.prototype.makeTextHighlighted = function () {
+      if (this.highlighted === false) {
+        this.highlighted = true;
+      } else {
+        this.highlighted = false;
+      }
+    }
+
+    const postes5 = new PostES5('Виктор', 'Очень здравый пост');
+    console.log(postes5);
+    postes5.edit('Другой пост');
+    console.log(postes5);
+
+    const atPostes5 = new AttachedPostES5('Стас', 'Закреплённый пост');
+    console.log(atPostes5);
+    atPostes5.makeTextHighlighted();
+    console.log(atPostes5);
+    atPostes5.makeTextHighlighted();
+    console.log(atPostes5);
+
+
+    // -----------------------------------------------------------
+
+
+    class PostES6 {
+      constructor(authorName, text) {
+        this.authorName = authorName;
+        this.text = text;
+        this.date = new Date();
+      }
+
+      edit(newText) {
+        this.text = newText;
+        this.date = new Date();
+      }
+    }
+
+    class AttachedPostES6 extends PostES6 {
+      constructor(authorName, text) {
+        super(authorName, text);
+        this.highlighted = false;
+      }
+
+      makeTextHighlighted() {
+        if (this.highlighted === false) {
+          this.highlighted = true;
+        } else {
+          this.highlighted = false;
+        }
+      }
+    }
+
+    const postes6 = new PostES6('Виктор', 'Очень здравый пост');
+    console.log(postes6);
+    postes6.edit('Другой пост');
+    console.log(postes6);
+
+    const atPostes6 = new AttachedPostES6('Стас', 'Закреплённый пост');
+    console.log(atPostes6);
+    atPostes6.makeTextHighlighted();
+    console.log(atPostes6);
+    atPostes6.makeTextHighlighted();
+    console.log(atPostes6);
+
+  </script>
 </body>
+
 </html>
