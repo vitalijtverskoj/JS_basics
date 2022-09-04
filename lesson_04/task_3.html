@@ -33,7 +33,29 @@
   <script>
     "use strict";
 
-    function 
+    function getDigitsOfNumber(number) {
+      if (Number.isInteger(number) && 0 < number && number <= 999) {
+
+        class intPosNumber {
+          constructor(num) {
+            this.units = num % 10;
+            this.dozens = Math.trunc(num / 10) % 10;
+            this.hundreds = Math.trunc(num / 100) % 10;
+          }
+        }
+
+        const intPosNum = new intPosNumber(number);
+        return intPosNum;
+      } else {
+        console.log('ОШИБКА! Введите целое положительное число от 0 до 1000!')
+        return {};
+      }
+    }
+
+    console.log(getDigitsOfNumber(526));
+    console.log(getDigitsOfNumber(1235));
+    console.log(getDigitsOfNumber(-526));
+    console.log(getDigitsOfNumber(526.66));
   </script>
 </body>
 
